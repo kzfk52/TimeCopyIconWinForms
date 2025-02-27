@@ -75,11 +75,22 @@ namespace TimeCopyIconWinForms
         {
             long unixT = 0;
             TextBox chk = (TextBox)sender;
+            var txt = chk.Text.Trim();
 
-            if (long.TryParse(chk.Text.Trim(), out unixT))
+            if (long.TryParse(txt, out unixT))
             {
-                // ローカルタイム
-                textBox2.Text = UnixTimeToLocalDateString(unixT);
+                if(txt.Length == 13)
+                {
+                    // ローカルタイム
+                    textBox2.Text = UnixMicroTimeToLocalDateString(unixT);
+
+                }
+                else
+                {
+                    // ローカルタイム 10
+                    textBox2.Text = UnixTimeToLocalDateString(unixT);
+
+                }
             }
             else
             {
@@ -90,7 +101,15 @@ namespace TimeCopyIconWinForms
 
         private string UnixTimeToLocalDateString(long unixTime)
         {
+            // 1740633224
+            // 1613440233000
             return DateTimeOffset.FromUnixTimeSeconds(unixTime).LocalDateTime.ToString("yyyy/MM/dd HH:mm:ss");
+        }
+        private string UnixMicroTimeToLocalDateString(long unixTime)
+        {
+            // 1740633224
+            // 1613440233000
+            return DateTimeOffset.FromUnixTimeMilliseconds(unixTime).LocalDateTime.ToString("yyyy/MM/dd HH:mm:ss");
         }
 
 
@@ -137,10 +156,6 @@ namespace TimeCopyIconWinForms
 
         }
         private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
