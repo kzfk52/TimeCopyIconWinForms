@@ -49,12 +49,12 @@ TimeCopyIcon.sln
 | 0 | Repo prep: `.gitignore`, branch (`migrate-avalonia`) | Done |
 | 1 | Extract `TimeCopy.Core` + xUnit tests | Done |
 | 2 | Bootstrap Avalonia project (`TimeCopy.Desktop`), verify launch on Windows & macOS | Done (macOS launch confirmed via `dotnet run`) |
-| 3 | Rebuild `Form1` UI in Avalonia XAML + ViewModel | Planned |
-| 4 | TrayIcon (Windows tray / macOS menu bar) with context menu | Planned |
-| 5 | Clipboard + cross-platform notifications | Planned |
-| 6 | Single-instance enforcement (lockfile / named pipe; cross-platform) | Planned |
-| 7 | Packaging: macOS `.app` + signing + notarization, Windows code signing | Planned |
-| 8 | Retire `TimeCopyIconWinForms` project | Planned |
+| 3 | Rebuild `Form1` UI in Avalonia XAML + ViewModel | Done (A: ViewModel/services, B: XAML layout, C: services wired, D: AnnounceP) |
+| 4 | TrayIcon (Windows tray / macOS menu bar) with context menu | Done (D defers the ~15s macOS startup-lag investigation - see Known Issues) |
+| 5 | Clipboard + cross-platform notifications | Deferred (in-window toast in place on all OSes; macOS native postponed to Phase 7 - see Notifications) |
+| 6 | Single-instance enforcement (lockfile / named pipe; cross-platform) | Done (`SingleInstanceLock` with `FileShare.None`) |
+| 7 | Packaging: macOS `.app` + signing + notarization, Windows code signing | **Next**. Bundles macOS notification identity, expected to unlock `MacOsNotificationService`. |
+| 8 | Retire `TimeCopyIconWinForms` project | Planned. Recommended before Phase 7 to keep the .app build config simple. |
 
 ## Key Technical Decisions
 
@@ -93,7 +93,18 @@ TimeCopyIcon.sln
 ## Local Toolchain (macOS verified)
 
 - `.NET 10 SDK` installed via Homebrew (`/opt/homebrew/Cellar/dotnet/10.0.107`)
-- Working branch: `migrate-avalonia`
+- Working branch: `migrate-avalonia` (pushed to origin)
+- ImageMagick available at `/opt/homebrew/bin/magick` (used to convert `stopwatch.ico` → `stopwatch.png` for the tray)
+
+## Resume Pointer
+
+Last interactive session ended with Phases 0–6 in place (Phase 5 deferred). To pick up:
+
+1. Decide on **Phase 8 (retire WinForms)** vs **Phase 7 (packaging)** as the next step. Phase 8 first is the cleaner path because it removes Windows-only artefacts before the macOS bundle work begins.
+2. After Phase 7: revive `MacOsNotificationService` and switch the OS-routing in `App.CreateNotificationService` back on, since the `.app` bundle owns its own notification identity.
+3. Investigation queue: macOS menu-bar icon `~15s` startup lag (Phase 4-D, deferred).
+
+`screenshot_win.png` at the repo root is a user-supplied reference of the Windows Form 1 layout; still untracked - decide whether to move it under `docs/` or `.gitignore` it during Phase 8 cleanup.
 
 ## Build & Test
 
