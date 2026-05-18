@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -27,12 +28,7 @@ public partial class App : Application
             var mainWindow = new MainWindow();
 
             var clipboardService = new AvaloniaClipboardService(() => mainWindow.Clipboard);
-            var notificationService = new WindowNotificationService(
-                new WindowNotificationManager(mainWindow)
-                {
-                    Position = NotificationPosition.BottomRight,
-                    MaxItems = 3,
-                });
+            var notificationService = CreateNotificationService(mainWindow);
 
             var viewModel = new MainWindowViewModel(
                 clipboardService,
@@ -59,6 +55,21 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static INotificationService CreateNotificationService(MainWindow mainWindow)
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            return new MacOsNotificationService();
+        }
+
+        return new WindowNotificationService(
+            new WindowNotificationManager(mainWindow)
+            {
+                Position = NotificationPosition.BottomRight,
+                MaxItems = 3,
+            });
     }
 
     private void ShutdownApplication(IClassicDesktopStyleApplicationLifetime desktop, MainWindow mainWindow)
