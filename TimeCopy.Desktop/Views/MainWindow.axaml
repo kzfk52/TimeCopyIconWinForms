@@ -8,8 +8,9 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="TimeCopy"
-        Width="320" Height="380"
-        MinWidth="300" MinHeight="340">
+        Width="320"
+        SizeToContent="Height"
+        MinWidth="300" MinHeight="380">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
