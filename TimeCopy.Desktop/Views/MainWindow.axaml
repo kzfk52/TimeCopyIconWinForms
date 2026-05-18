@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="380"
         x:Class="TimeCopy.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/stopwatch.ico"
         Title="TimeCopy"
         Width="320"
         SizeToContent="Height"
