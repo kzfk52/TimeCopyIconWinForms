@@ -259,3 +259,22 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+
+# Rider per-user files (in addition to .idea/)
+*.sln.DotSettings.user
+
+# Avalonia / cross-platform packaging output
+*.app/
+*.dmg
+publish-*/
+
+# Tooling caches
+.cache/
