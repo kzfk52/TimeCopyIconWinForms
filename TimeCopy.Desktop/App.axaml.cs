@@ -80,8 +80,9 @@ public partial class App : Application
             IsVisible = true,
         };
 
-        trayIcon.Clicked += (_, _) => viewModel.CopyUnixTimeCommand.Execute(null);
-
+        // Avoid wiring Clicked: macOS shows the menu on primary click and
+        // suppresses the event, while on Windows it would race with the
+        // context-menu interaction. All actions are reachable from the menu.
         TrayIcon.SetIcons(this, [trayIcon]);
     }
 
