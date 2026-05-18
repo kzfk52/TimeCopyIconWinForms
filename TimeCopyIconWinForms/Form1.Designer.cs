@@ -55,6 +55,7 @@
             actionToolStripMenuItem2YMDColon = new ToolStripMenuItem();
             actionToolStripMenuItem3YMD = new ToolStripMenuItem();
             actionToolStripMenuItem4ForExit = new ToolStripMenuItem();
+            announcePToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -114,9 +115,9 @@
             groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(textBoxFromUnixtime);
             groupBox1.Location = new Point(6, 26);
-            groupBox1.Margin = new Padding(4, 4, 4, 4);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 4, 4, 4);
+            groupBox1.Padding = new Padding(4);
             groupBox1.Size = new Size(285, 110);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
@@ -145,7 +146,7 @@
             // 
             textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBox2.Location = new Point(10, 81);
-            textBox2.Margin = new Padding(4, 4, 4, 4);
+            textBox2.Margin = new Padding(4);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(270, 23);
             textBox2.TabIndex = 2;
@@ -154,7 +155,7 @@
             // 
             textBoxFromUnixtime.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxFromUnixtime.Location = new Point(10, 39);
-            textBoxFromUnixtime.Margin = new Padding(4, 4, 4, 4);
+            textBoxFromUnixtime.Margin = new Padding(4);
             textBoxFromUnixtime.Name = "textBoxFromUnixtime";
             textBoxFromUnixtime.Size = new Size(270, 23);
             textBoxFromUnixtime.TabIndex = 1;
@@ -170,9 +171,9 @@
             groupBox2.Controls.Add(textBoxISO8601ToUnixtime);
             groupBox2.Controls.Add(textBoxFromISO8601);
             groupBox2.Location = new Point(6, 143);
-            groupBox2.Margin = new Padding(4, 4, 4, 4);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 4, 4, 4);
+            groupBox2.Padding = new Padding(4);
             groupBox2.Size = new Size(285, 200);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
@@ -221,7 +222,7 @@
             // 
             textBoxISO8601ToUnixtime.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxISO8601ToUnixtime.Location = new Point(10, 101);
-            textBoxISO8601ToUnixtime.Margin = new Padding(4, 4, 4, 4);
+            textBoxISO8601ToUnixtime.Margin = new Padding(4);
             textBoxISO8601ToUnixtime.Name = "textBoxISO8601ToUnixtime";
             textBoxISO8601ToUnixtime.Size = new Size(270, 23);
             textBoxISO8601ToUnixtime.TabIndex = 5;
@@ -230,7 +231,7 @@
             // 
             textBoxFromISO8601.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxFromISO8601.Location = new Point(10, 52);
-            textBoxFromISO8601.Margin = new Padding(4, 4, 4, 4);
+            textBoxFromISO8601.Margin = new Padding(4);
             textBoxFromISO8601.Name = "textBoxFromISO8601";
             textBoxFromISO8601.Size = new Size(270, 23);
             textBoxFromISO8601.TabIndex = 4;
@@ -249,7 +250,7 @@
             // 
             // actionToolStripMenuItem
             // 
-            actionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { actionToolStripMenuItem1UnixTime, actionToolStripMenuItem2YMDColon, actionToolStripMenuItem3YMD, actionToolStripMenuItem4ForExit });
+            actionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { announcePToolStripMenuItem, actionToolStripMenuItem1UnixTime, actionToolStripMenuItem2YMDColon, actionToolStripMenuItem3YMD, actionToolStripMenuItem4ForExit });
             actionToolStripMenuItem.Name = "actionToolStripMenuItem";
             actionToolStripMenuItem.Size = new Size(54, 20);
             actionToolStripMenuItem.Text = "Action";
@@ -257,30 +258,37 @@
             // actionToolStripMenuItem1UnixTime
             // 
             actionToolStripMenuItem1UnixTime.Name = "actionToolStripMenuItem1UnixTime";
-            actionToolStripMenuItem1UnixTime.Size = new Size(169, 22);
+            actionToolStripMenuItem1UnixTime.Size = new Size(180, 22);
             actionToolStripMenuItem1UnixTime.Text = "UnixTime値をコピー";
             actionToolStripMenuItem1UnixTime.Click += Action1CopyUnixtime_Click;
             // 
             // actionToolStripMenuItem2YMDColon
             // 
             actionToolStripMenuItem2YMDColon.Name = "actionToolStripMenuItem2YMDColon";
-            actionToolStripMenuItem2YMDColon.Size = new Size(169, 22);
+            actionToolStripMenuItem2YMDColon.Size = new Size(180, 22);
             actionToolStripMenuItem2YMDColon.Text = "Y/m/d H:i:sをコピー";
             actionToolStripMenuItem2YMDColon.Click += Action2CopyYmd1_Click;
             // 
             // actionToolStripMenuItem3YMD
             // 
             actionToolStripMenuItem3YMD.Name = "actionToolStripMenuItem3YMD";
-            actionToolStripMenuItem3YMD.Size = new Size(169, 22);
+            actionToolStripMenuItem3YMD.Size = new Size(180, 22);
             actionToolStripMenuItem3YMD.Text = "YmdHisをコピー";
             actionToolStripMenuItem3YMD.Click += Action3CopyYmd2_Click;
             // 
             // actionToolStripMenuItem4ForExit
             // 
             actionToolStripMenuItem4ForExit.Name = "actionToolStripMenuItem4ForExit";
-            actionToolStripMenuItem4ForExit.Size = new Size(169, 22);
+            actionToolStripMenuItem4ForExit.Size = new Size(180, 22);
             actionToolStripMenuItem4ForExit.Text = "終了(&C)";
             actionToolStripMenuItem4ForExit.Click += Action4ToolStripMenuItemForExit_Click;
+            // 
+            // announcePToolStripMenuItem
+            // 
+            announcePToolStripMenuItem.Name = "announcePToolStripMenuItem";
+            announcePToolStripMenuItem.Size = new Size(180, 22);
+            announcePToolStripMenuItem.Text = "AnnounceP";
+            announcePToolStripMenuItem.Click += announcePToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -293,7 +301,7 @@
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Form1";
             Text = "Form1";
             FormClosing += Form1_FormClosing;
@@ -336,5 +344,6 @@
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem2YMDColon;
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem3YMD;
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem4ForExit;
+        private ToolStripMenuItem announcePToolStripMenuItem;
     }
 }
