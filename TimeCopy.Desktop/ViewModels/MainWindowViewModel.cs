@@ -77,7 +77,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private async Task CopyIso8601ExampleAsync()
     {
         await _clipboard.SetTextAsync(Iso8601Example);
-        const string message = "サンプル日付をコピーしました。";
+        const string message = "サンプル日付けをコピーしました。";
         _notifications.Notify("ISO8601", message);
         ConversionMessage = message;
     }
@@ -97,7 +97,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (TimeFormatter.TryParseIso8601ToUnixSeconds(value, out var unix, out var local))
         {
             Iso8601AsUnixTime = unix.ToString();
-            ConversionMessage = $"変換しました。日付は{Environment.NewLine}{local}";
+            ConversionMessage = $"変換しました。日付けは{Environment.NewLine}{local}";
         }
         else
         {

@@ -3,18 +3,113 @@
         xmlns:vm="using:TimeCopy.Desktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="380"
         x:Class="TimeCopy.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="TimeCopy.Desktop">
+        Title="TimeCopy"
+        Width="320" Height="380"
+        MinWidth="300" MinHeight="340">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Iso8601Example}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Window.Styles>
+        <Style Selector="HeaderedContentControl.group">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid Margin="0,8,0,0">
+                        <Border BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="10,14,10,10">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                        <Border Background="{DynamicResource SolidBackgroundFillColorBaseBrush}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="10,-7,0,0"
+                                Padding="4,0">
+                            <ContentPresenter Content="{TemplateBinding Header}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+    </Window.Styles>
 
+    <DockPanel LastChildFill="True">
+        <!-- Menu bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Action">
+                <MenuItem Header="UnixTime値をコピー"
+                          Command="{Binding CopyUnixTimeCommand}"/>
+                <MenuItem Header="Y/m/d H:i:sをコピー"
+                          Command="{Binding CopyYmdSlashCommand}"/>
+                <MenuItem Header="YmdHisをコピー"
+                          Command="{Binding CopyYmdCompactCommand}"/>
+                <Separator/>
+                <MenuItem Header="終了(_C)"
+                          Command="{Binding ExitCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Body -->
+        <StackPanel Margin="8" Spacing="6">
+
+            <!-- Group: unixtime → 普通 -->
+            <HeaderedContentControl Classes="group"
+                                    Header="unixtimeを普通にする">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="unixtime"/>
+                    <TextBox Text="{Binding UnixTimeInput, Mode=TwoWay}"/>
+                    <TextBlock Text="↓ LocalDateTime"
+                               HorizontalAlignment="Center"
+                               Margin="0,4,0,0"/>
+                    <TextBox Text="{Binding UnixTimeAsLocalDate}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+            </HeaderedContentControl>
+
+            <!-- Group: 日付け文字列 → unixtime -->
+            <HeaderedContentControl Classes="group"
+                                    Header="日付け文字列をunixtime">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+                      ColumnDefinitions="*,Auto"
+                      RowSpacing="4">
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="ISO 8601形式対応"
+                               VerticalAlignment="Center"/>
+                    <TextBox  Grid.Row="0" Grid.Column="1"
+                              Width="155"
+                              Text="{Binding Iso8601Example}"
+                              IsReadOnly="True"
+                              GotFocus="OnIso8601ExampleGotFocus"
+                              ToolTip.Tip="クリックでクリップボードへコピー"/>
+
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2"
+                             Text="{Binding Iso8601Input, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2"
+                               Text="↓"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBox Grid.Row="3" Grid.ColumnSpan="2"
+                             Text="{Binding Iso8601AsUnixTime}"
+                             IsReadOnly="True"/>
+
+                    <TextBox Grid.Row="4" Grid.ColumnSpan="2"
+                             Text="{Binding ConversionMessage}"
+                             IsReadOnly="True"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="60"
+                             Margin="0,4,0,0"/>
+                </Grid>
+            </HeaderedContentControl>
+
+        </StackPanel>
+    </DockPanel>
 </Window>
