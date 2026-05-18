@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace TimeCopyIconWinForms
 {
@@ -69,7 +70,7 @@ namespace TimeCopyIconWinForms
         }
 
 
-        
+
 
         private void textBoxFromUnixtime_Leave(object sender, EventArgs e)
         {
@@ -79,7 +80,7 @@ namespace TimeCopyIconWinForms
 
             if (long.TryParse(txt, out unixT))
             {
-                if(txt.Length == 13)
+                if (txt.Length == 13)
                 {
                     // ローカルタイム
                     textBox2.Text = UnixMicroTimeToLocalDateString(unixT);
@@ -157,6 +158,25 @@ namespace TimeCopyIconWinForms
         }
         private void groupBox2_Enter(object sender, EventArgs e)
         {
+
+        }
+
+        private void announcePToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
+            if (!string.IsNullOrEmpty(clip))
+            {
+
+                Regex r = new System.Text.RegularExpressions.Regex(Environment.NewLine);
+                string br =r.Replace(clip.Trim(), "<br/>" + Environment.NewLine);
+
+
+                string newString = $"<p>\n{br}\n</p>";
+                Clipboard.SetText(newString);
+                Notify("SaleAnnounce", @"貼付テキストを加工しました。");
+                textBoxToUnixMessage.Text = @"貼付テキストを加工しました。";
+            }
 
         }
     }
