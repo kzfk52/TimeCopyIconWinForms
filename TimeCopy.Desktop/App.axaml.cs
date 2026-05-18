@@ -88,7 +88,7 @@ public partial class App : Application
 
     private static WindowIcon LoadTrayIcon()
     {
-        using var stream = AssetLoader.Open(new Uri("avares://TimeCopy.Desktop/Assets/stopwatch.ico"));
+        using var stream = AssetLoader.Open(new Uri("avares://TimeCopy.Desktop/Assets/stopwatch.png"));
         return new WindowIcon(stream);
     }
 

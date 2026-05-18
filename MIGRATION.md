@@ -80,6 +80,10 @@ TimeCopyIcon.sln
 | Apple notarization adds operational overhead | Distribute unsigned builds initially; add signing as a separate Phase 7 sub-task |
 | WinForms project and Avalonia project diverge during parallel maintenance | Freeze the WinForms project to security-only fixes once Phase 3 starts |
 
+## Known Issues
+
+- **macOS menu-bar icon appears ~15s after the window** — `TrayIcon` registration takes a long time to surface in the menu bar on macOS (`Release` build, `.ico` and `.png` both reproduce; the main window and all commands work immediately). Day-to-day usage isn't blocked because the user does not interact with the icon right after launch. Deferred — revisit after the rest of the migration is in place; likely investigation path is the Avalonia 12 `NSStatusItem` integration.
+
 ## Local Toolchain (macOS verified)
 
 - `.NET 10 SDK` installed via Homebrew (`/opt/homebrew/Cellar/dotnet/10.0.107`)
