@@ -1,9 +1,9 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
-using System.Linq;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
+using TimeCopy.Desktop.Services;
 using TimeCopy.Desktop.ViewModels;
 using TimeCopy.Desktop.Views;
 
@@ -20,10 +20,26 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
+            var mainWindow = new MainWindow();
+
+            var clipboardService = new AvaloniaClipboardService(() => mainWindow.Clipboard);
+            var notificationService = new WindowNotificationService(
+                new WindowNotificationManager(mainWindow)
+                {
+                    Position = NotificationPosition.BottomRight,
+                    MaxItems = 3,
+                });
+
+            var viewModel = new MainWindowViewModel(
+                clipboardService,
+                notificationService,
+                () => DateTimeOffset.Now)
             {
-                DataContext = new MainWindowViewModel(),
+                RequestExit = () => desktop.Shutdown(),
             };
+
+            mainWindow.DataContext = viewModel;
+            desktop.MainWindow = mainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();
