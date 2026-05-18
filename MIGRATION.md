@@ -82,8 +82,9 @@ TimeCopyIcon.sln
 
 ## Notifications
 
-- **macOS**: `MacOsNotificationService` shells out to `osascript -e 'display notification ...'`. Until the app is packaged as a `.app` bundle (Phase 7), notifications surface under the `Script Editor` source name; once bundled they will use the app's identity.
-- **Windows / Linux**: `WindowNotificationService` keeps using Avalonia's in-window toast. Native Windows Toast (P/Invoke or `Microsoft.Toolkit.Uwp.Notifications` standalone) is a follow-up item.
+- All platforms currently use `WindowNotificationService` (Avalonia in-window toast). This works regardless of OS permissions and matches what we have right now.
+- A `MacOsNotificationService` (osascript-based) is checked in but unwired. macOS denies osascript notifications by default unless the user explicitly enables Script Editor in System Settings → Notifications, which is too hostile a setup step for the dev loop. The plan is to wire it in **Phase 7** once we ship a `.app` bundle: the bundle gets its own notification identity, the OS shows a one-time permission prompt under the app's name, and `MacOsNotificationService` (or a UNUserNotificationCenter P/Invoke equivalent) becomes the macOS default.
+- Native Windows Toast (P/Invoke or `Microsoft.Toolkit.Uwp.Notifications` standalone) remains a follow-up.
 
 ## Known Issues
 

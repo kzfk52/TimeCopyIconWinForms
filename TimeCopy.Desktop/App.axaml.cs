@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -59,11 +58,11 @@ public partial class App : Application
 
     private static INotificationService CreateNotificationService(MainWindow mainWindow)
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-        {
-            return new MacOsNotificationService();
-        }
-
+        // macOS native notifications via osascript require Script Editor
+        // notification permission, which is off by default. The MacOs path is
+        // kept in code (MacOsNotificationService) but will be wired only once
+        // the app ships as a .app bundle in Phase 7. Until then everyone uses
+        // the in-window toast.
         return new WindowNotificationService(
             new WindowNotificationManager(mainWindow)
             {
