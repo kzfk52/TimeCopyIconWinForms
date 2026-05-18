@@ -83,6 +83,23 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private async Task AnnouncePAsync()
+    {
+        var clip = await _clipboard.GetTextAsync();
+        if (string.IsNullOrEmpty(clip))
+        {
+            return;
+        }
+
+        var wrapped = TextAnnouncer.WrapAsParagraph(clip);
+        await _clipboard.SetTextAsync(wrapped);
+
+        const string message = "貼付テキストを加工しました。";
+        _notifications.Notify("SaleAnnounce", message);
+        ConversionMessage = message;
+    }
+
+    [RelayCommand]
     private void Exit() => RequestExit?.Invoke();
 
     partial void OnUnixTimeInputChanged(string value)

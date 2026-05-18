@@ -23,4 +23,15 @@ public sealed class AvaloniaClipboardService : IClipboardService
 
         await clipboard.SetTextAsync(text);
     }
+
+    public async Task<string?> GetTextAsync()
+    {
+        var clipboard = _resolveClipboard();
+        if (clipboard is null)
+        {
+            return null;
+        }
+
+        return await clipboard.TryGetTextAsync();
+    }
 }

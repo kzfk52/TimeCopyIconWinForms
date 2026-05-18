@@ -44,6 +44,9 @@
         <!-- Menu bar -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Action">
+                <MenuItem Header="AnnounceP"
+                          Command="{Binding AnnouncePCommand}"/>
+                <Separator/>
                 <MenuItem Header="UnixTime値をコピー"
                           Command="{Binding CopyUnixTimeCommand}"/>
                 <MenuItem Header="Y/m/d H:i:sをコピー"
