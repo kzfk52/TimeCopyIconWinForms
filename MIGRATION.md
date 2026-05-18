@@ -46,9 +46,9 @@ TimeCopyIcon.sln
 
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Repo prep: `.gitignore`, branch (`migrate-avalonia`) | In progress |
-| 1 | Extract `TimeCopy.Core` + xUnit tests | In progress |
-| 2 | Bootstrap empty Avalonia project, verify launch on Windows & macOS | Planned |
+| 0 | Repo prep: `.gitignore`, branch (`migrate-avalonia`) | Done |
+| 1 | Extract `TimeCopy.Core` + xUnit tests | Done |
+| 2 | Bootstrap Avalonia project (`TimeCopy.Desktop`), verify launch on Windows & macOS | Done (macOS build verified; window launch needs manual confirmation) |
 | 3 | Rebuild `Form1` UI in Avalonia XAML + ViewModel | Planned |
 | 4 | TrayIcon (Windows tray / macOS menu bar) with context menu | Planned |
 | 5 | Clipboard + cross-platform notifications | Planned |

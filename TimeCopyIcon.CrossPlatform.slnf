@@ -3,7 +3,8 @@
     "path": "TimeCopyIcon.sln",
     "projects": [
       "TimeCopy.Core\\TimeCopy.Core.csproj",
-      "TimeCopy.Core.Tests\\TimeCopy.Core.Tests.csproj"
+      "TimeCopy.Core.Tests\\TimeCopy.Core.Tests.csproj",
+      "TimeCopy.Desktop\\TimeCopy.Desktop.csproj"
     ]
   }
 }
