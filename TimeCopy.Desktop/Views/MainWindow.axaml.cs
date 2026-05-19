@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using TimeCopy.Desktop.ViewModels;
@@ -15,7 +16,12 @@ public partial class MainWindow : Window
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
-        if (!IsClosingForReal)
+        // On macOS, keep the app alive in the menu bar when the user clicks the
+        // window's red close button (standard mac behavior). On Windows we honor
+        // the local convention that closing the window quits the app. Shutdown
+        // paths (tray "終了", Dock → Quit, OS logoff) always pass through.
+        var isUserClosing = e.CloseReason == WindowCloseReason.WindowClosing;
+        if (!IsClosingForReal && isUserClosing && OperatingSystem.IsMacOS())
         {
             e.Cancel = true;
             Hide();

@@ -51,6 +51,14 @@ public partial class App : Application
             });
 
             ConfigureTrayIcon(viewModel, showWindowCommand);
+
+            // Triggered by Dock → Quit on macOS and other OS-level shutdown
+            // requests. Drop the tray icon so it does not linger after exit.
+            desktop.ShutdownRequested += (_, _) =>
+            {
+                mainWindow.IsClosingForReal = true;
+                TrayIcon.SetIcons(this, []);
+            };
         }
 
         base.OnFrameworkInitializationCompleted();
